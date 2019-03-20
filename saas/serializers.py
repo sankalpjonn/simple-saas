@@ -4,6 +4,7 @@ from .models import Plan, Subscription, Business, BusinessTeamMember
 from django.contrib.auth.models import User
 from .exceptions import CustomValidation
 from django.contrib.auth import authenticate
+from datetime import datetime, timedelta
 
 import helpers
 
@@ -133,6 +134,8 @@ class SignupSerializer(serializers.Serializer):
     		"business": business,
     		"plan": free_trial_plan,
     		"is_active": True,
+            "start_time": datetime.now(),
+            "end_time": datetime.now() + timedelta(days=free_trial_plan.duration_days)
     	}
     	Subscription.objects.create(**subscription)
 
