@@ -36,7 +36,6 @@ INSTALLED_APPS = [
 
 	'rest_framework.authtoken',
 	'django_filters',
-	'suit',
 	'rest_framework',
 	'corsheaders',
 
@@ -142,25 +141,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-AWS_STORAGE_BUCKET_NAME = 'plux-admin'
-AWS_MEDIA_FILES_BUCKET_NAME = 'sessionfoxmedia'
-AWS_BUCKET_REGION = 'us-east-2'
 
 STATIC_URL = '/static/'
-AWS_S3_CUSTOM_DOMAIN = '{}.s3.{}.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME, AWS_BUCKET_REGION)
-
-STATIC_S3_PATH = "static"
-STATICFILES_FINDERS = (
-	'django.contrib.staticfiles.finders.FileSystemFinder',
-	'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
-STATIC_ROOT = "/%s/" % STATIC_S3_PATH
-STATIC_URL = '//%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, STATIC_S3_PATH)
-
-
-S3_BASE_POLICY = {
-  "conditions": [
-	{"bucket": AWS_MEDIA_FILES_BUCKET_NAME},
-	{"acl": "private"}
-  ]
-}

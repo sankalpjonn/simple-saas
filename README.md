@@ -1,10 +1,10 @@
 # simple-saas
-This django project is meant to serve as a boiler plate code for any building any saas tool
+- This django project is meant to serve as a boiler plate code for any building any saas tool
 
-django-rest-framework is used for authentication and creating apis. Please refer to [this](https://github.com/encode/django-rest-framework)
+- django-rest-framework is used for authentication and creating apis. Please refer to [this](https://github.com/encode/django-rest-framework)
  if not familiar with django-rest-framework since this project heavily relies on it.
 
-business logic for all APIs is present in serializers.
+- business logic for all APIs is present in serializers.
 
 ## APIs inheriting BusinessAPIView
 Checks if authtoken present in the header belongs to a valid business and returns the appropriate response if no valid business is found
