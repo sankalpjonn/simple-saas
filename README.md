@@ -8,6 +8,8 @@
 
 - business logic for all APIs is present in serializers.
 
+- to use this as a library, refer to [this](https://github.com/sankalpjonn/simple-saas#using-as-a-library)
+
 ## APIs inheriting BusinessAPIView
 Checks if authtoken present in the header belongs to a valid business and returns the appropriate response if no valid business is found
 
@@ -89,6 +91,7 @@ REST_FRAMEWORK = {
 ```sh
 python manage.py migrate
 ```
+
 #### add to urls.py
 in the root urls, add
 ```python
