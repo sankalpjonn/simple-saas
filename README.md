@@ -1,6 +1,8 @@
 # simple-saas
 - This django project is meant to serve as a boiler plate code for any building any saas tool
 
+- The directory `saas` serves as a django app with all the boiler plate code
+
 - django-rest-framework is used for authentication and creating apis. Please refer to [this](https://github.com/encode/django-rest-framework)
  if not familiar with django-rest-framework since this project heavily relies on it.
 
@@ -54,4 +56,32 @@ curl -XPOST 'http://localhost:8000/saas/invite' -H "Authorization: Token 534fe89
 #### Prefill Signup form
 ```curl
 curl -XGET 'http://localhost:8000/saas/signup/prefill?key=<activation_key>'
+```
+
+### Using as a library
+If you feel that the current functionality is enough and you wish to simply use the `saas` app in your existing django project, follow these steps
+
+#### Installation
+```sh
+pip install git+https://github.com/sankalpjonn/simple-saas
+```
+
+#### add saas and rest_framework to INSTALLED_APPS
+```python
+INSTALLED_APPS = [
+	'saas',
+
+	'rest_framework.authtoken',
+	'rest_framework',
+]
+```
+
+#### add to urls.py
+in the root urls, add
+```python
+urlpatterns = [
+	url(r'^', include('django.contrib.auth.urls')),
+	url(r'^admin/', admin.site.urls),
+    url(r'^saas/', include('saas.urls')),
+]
 ```
