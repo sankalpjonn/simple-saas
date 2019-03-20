@@ -1,7 +1,7 @@
 # simple-saas
-- This django project is meant to serve as a boiler plate code for building any saas tool
+- This django project is meant to serve as a boilerplate code for building any saas tool
 
-- The directory `saas` serves as a django app with all the boiler plate code
+- The directory `saas` serves as a django app with all the boilerplate code
 
 - django-rest-framework is used for authentication and creating apis. Please refer to [this](https://github.com/encode/django-rest-framework)
  if not familiar with django-rest-framework since this project heavily relies on it.
