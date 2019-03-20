@@ -63,7 +63,7 @@ REST_FRAMEWORK = {
 	'PAGE_SIZE': 100
 }
 
-ROOT_URLCONF = 'saas.urls'
+ROOT_URLCONF = 'urls'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMP_DIR = os.path.join(BASE_DIR, 'templates')

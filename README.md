@@ -23,35 +23,35 @@ must override the `get_object()` method and whatever is returned by this method 
 
 #### Signup
 ```curl
-curl -XPOST 'http://localhost:8000/signup' -d '{"business": {"name": "test inc"}, "email": "test@test.com", "first_name": "sankalp", "last_name": "jonna", "password1": "pleasepass", "password2": "pleasepass"}' -H "Content-type: application/json"
+curl -XPOST 'http://localhost:8000/saas/signup' -d '{"business": {"name": "test inc"}, "email": "test@test.com", "first_name": "sankalp", "last_name": "jonna", "password1": "pleasepass", "password2": "pleasepass"}' -H "Content-type: application/json"
 ```
 
 #### Login
 ```curl
-curl -XPOST 'http://localhost:8000/login' -d '{"email": "test@test.com", "password": "pleasepass"}' -H "Content-type: application/json"
+curl -XPOST 'http://localhost:8000/saas/login' -d '{"email": "test@test.com", "password": "pleasepass"}' -H "Content-type: application/json"
 ```
 
 #### Reset password
 ```curl
-curl -XPOST 'http://localhost:8000/passwd/reset' -d '{"email": "test@test.com"}' -H "Content-type: application/json"
+curl -XPOST 'http://localhost:8000/saas/passwd/reset' -d '{"email": "test@test.com"}' -H "Content-type: application/json"
 ```
 
 #### Reset password confirmation
 ```curl
-curl -XPOST 'http://localhost:8000/passwd/reset/cnfrm' -d '{"activation_key": "<activation_key>", "password1": "sankalp", "password2": "sankalp"}' -H "Content-type: application/json"
+curl -XPOST 'http://localhost:8000/saas/passwd/reset/cnfrm' -d '{"activation_key": "<activation_key>", "password1": "sankalp", "password2": "sankalp"}' -H "Content-type: application/json"
 ```
 
 #### Me
 ```curl
-curl -XGET 'http://localhost:8000/me' -H "Authorization: Token <token>"
+curl -XGET 'http://localhost:8000/saas/me' -H "Authorization: Token <token>"
 ```
 
 #### Invite
 ```curl
-curl -XPOST 'http://localhost:8000/invite' -H "Authorization: Token 534fe89f5d6b9ff214e8883d7b9664177002056a" -H "Content-Type: application/json" -d '{"email": "test5@test.com"}'
+curl -XPOST 'http://localhost:8000/saas/invite' -H "Authorization: Token 534fe89f5d6b9ff214e8883d7b9664177002056a" -H "Content-Type: application/json" -d '{"email": "test5@test.com"}'
 ```
 
 #### Prefill Signup form
 ```curl
-curl -XGET 'http://localhost:8000/signup/prefill?key=<activation_key>'
+curl -XGET 'http://localhost:8000/saas/signup/prefill?key=<activation_key>'
 ```
