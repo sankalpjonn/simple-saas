@@ -1,5 +1,5 @@
 # simple-saas
-- This django project is meant to serve as a boiler plate code for any building any saas tool
+- This django project is meant to serve as a boiler plate code for building any saas tool
 
 - The directory `saas` serves as a django app with all the boiler plate code
 
