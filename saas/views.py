@@ -1,9 +1,11 @@
 from rest_framework.views import APIView
-from rest_framework.generics import CreateAPIView
-from .serializers import LoginSerializer, BusinessTeamMemberSerializer, ResetPasswordSerializer \
-                         SignupSerializer, ResetPasswordSerializer, ResetPasswordConfirmationSerializer \
+from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from rest_framework import parsers, serializers
+from .serializers import LoginSerializer, BusinessTeamMemberSerializer, ResetPasswordSerializer, \
+                         SignupSerializer, ResetPasswordSerializer, ResetPasswordConfirmationSerializer, \
                          InviteTeamMemberSerialiser
 from .permissions import IsBusiness
+from .models import BusinessTeamMember, Subscription
 
 class BusinessAPIView(APIView):
     """
@@ -11,7 +13,7 @@ class BusinessAPIView(APIView):
     if the user making the request is part of a business that is registered
     """
 
-	def initial(self, request, *args, **kwargs):
+    def initial(self, request, *args, **kwargs):
 		ret = super(BusinessAPIView, self).initial(request, *args, **kwargs)
 		if not request.user.is_anonymous():
 			try:
@@ -28,7 +30,7 @@ class SubscriptionAPIView(BusinessAPIView):
     there is an active subscription present for a business to which
     the user that is making the api call belongs to
     """
-	def initial(self, request, *args, **kwargs):
+    def initial(self, request, *args, **kwargs):
 		ret = super(SubscriptionAPIView, self).initial(request, *args, **kwargs)
 		try:
 			subscription = Subscription.objects.get(business=request.business, is_active=True)
@@ -57,12 +59,12 @@ class PrefillSignupView(RetrieveAPIView):
 		except BusinessTeamMember.DoesNotExist:
 			raise serializers.ValidationError('Activation key not found')
 
-class SignupView(generics.CreateAPIView):
+class SignupView(CreateAPIView):
 	serializer_class = SignupSerializer
 	parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
 
 
-class ResetPasswordView(generics.CreateAPIView):
+class ResetPasswordView(CreateAPIView):
 	"""
 	Sending email to a team member with an activation key that will be used to reset password
 	"""
@@ -71,7 +73,7 @@ class ResetPasswordView(generics.CreateAPIView):
 	parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
 
 
-class ResetPasswordConfirmationView(generics.CreateAPIView):
+class ResetPasswordConfirmationView(CreateAPIView):
 	"""
 	Using the activation key sent in the mail, password will be reset using new password
 	"""
@@ -79,7 +81,7 @@ class ResetPasswordConfirmationView(generics.CreateAPIView):
 	serializer_class = ResetPasswordConfirmationSerializer
 	parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
 
-class MeView(generics.RetrieveAPIView, BusinessAPIView):
+class MeView(RetrieveAPIView, BusinessAPIView):
 	"""
 	Returns information about the user to which this auth token belongs to and the corresponding business.
 	Can be used in settings
@@ -91,10 +93,10 @@ class MeView(generics.RetrieveAPIView, BusinessAPIView):
 	def get_object(self):
 		return BusinessTeamMember.objects.get(user=self.request.user, business=self.request.business)
 
-class InviteTeamMemberView(generics.CreateAPIView, SubscriptionAPIView):
-	"""
-	Sending invitation to a team member to join SessionFox
-	"""
+class InviteTeamMemberView(CreateAPIView, SubscriptionAPIView):
+    """
+    Sending invitation to a team member to join SessionFox
+    """
 
-	permission_classes = [IsBusiness]
-	serializer_class   = InviteTeamMemberSerialiser
+    permission_classes = [IsBusiness]
+    serializer_class   = InviteTeamMemberSerialiser

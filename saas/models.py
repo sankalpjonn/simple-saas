@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 # below models can be extended according to the specific saas uses cases. This is boiler plate only
 
 class Plan(models.Model):
+	PLAN_FREE_TIER_ID = 1
+
 	name              = models.CharField(max_length=255)
 	description       = models.CharField(max_length=255, null=True, blank=True)
 	usd_price         = models.DecimalField(max_digits=6, decimal_places=2)
