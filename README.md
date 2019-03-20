@@ -76,6 +76,19 @@ INSTALLED_APPS = [
 ]
 ```
 
+### add rest_framework settings
+```python
+REST_FRAMEWORK = {
+	'DEFAULT_AUTHENTICATION_CLASSES': (
+		'rest_framework.authentication.TokenAuthentication',
+	),
+}
+```
+
+### run migrations
+```sh
+python manage.py migrate
+```
 #### add to urls.py
 in the root urls, add
 ```python
