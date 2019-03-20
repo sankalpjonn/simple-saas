@@ -10,21 +10,6 @@
 
 - to use this as a library, refer to [this](https://github.com/sankalpjonn/simple-saas#using-as-a-library)
 
-## APIs inheriting BusinessAPIView
-Checks if authtoken present in the header belongs to a valid business and returns the appropriate response if no valid business is found
-
-## APIs inheriting SubscriptionAPIView
-Checks if authtoken present in header belongs to a valid business and also an active subscription exists for that business.
-
-## APIs inheriting rest_framework.generics.CreateAPIView
-- these are POST apis where `create()` in the serializer will be called after validating post data.
-- in serializers where there is an `update()` overridden, refer to the `save()` method to see whether create() is called or `update()` is called
-
-## APIs inheriting rest_framework.generics.RetrieveAPIView
-must override the `get_object()` method and whatever is returned by this method is serialized
-
-### APIs
-
 #### Signup
 ```curl
 curl -XPOST 'http://localhost:8000/saas/signup' -d '{"business": {"name": "test inc"}, "email": "test@test.com", "first_name": "sankalp", "last_name": "jonna", "password1": "pleasepass", "password2": "pleasepass"}' -H "Content-type: application/json"
@@ -78,7 +63,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-### add rest_framework settings
+#### add rest_framework settings
 ```python
 REST_FRAMEWORK = {
 	'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -87,7 +72,7 @@ REST_FRAMEWORK = {
 }
 ```
 
-### run migrations
+#### run migrations
 ```sh
 python manage.py migrate
 ```
